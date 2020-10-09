@@ -6,40 +6,46 @@ import MealDetailScreen from '../screens/MealDetailScreen';
 import { createAppContainer } from 'react-navigation';
 import Colors from '../constants/Colors';
 
+// Create a new navigation screens using  (react-navigation-stack) library
+
 const MealsNavigator = createStackNavigator({
-    Categories:{
-        screen:CategoriesScreen,
-        navigationOptions:{
-            headerTitle:  'Meal Categories',
+    // First screen
+    Categories: {
+        screen: CategoriesScreen,
+        navigationOptions: {
+            headerTitle: 'Meal Categories',
             headerStyle: {
-                backgroundColor:Colors.headerColor,
-        },
-        headerTintColor:'white',
-    },
-    },
-    CategoryMeals:{
-        screen:CategoryMealsScreen,
-        navigationOptions:{
-            headerTitle:  'Category Meals',
-            headerStyle: {
-                backgroundColor:Colors.headerColor,
+                backgroundColor: Colors.headerColor,
             },
-            headerTintColor:'white', 
+            headerTintColor: 'white',
         },
     },
-    MealDetail:{ 
-        screen:MealDetailScreen,
-        navigationOptions:{
-            headerTitle:  'Meal Details',
+
+    // Second screen
+    CategoryMeals: {
+        screen: CategoryMealsScreen,
+        navigationOptions: {
+            headerTitle: 'Category Meals',
             headerStyle: {
-                backgroundColor:Colors.headerColor,
+                backgroundColor: Colors.headerColor,
             },
-            headerTintColor:'white', 
+            headerTintColor: 'white',
         },
-    
+    },
+    // Third screen 
+    MealDetail: {
+        screen: MealDetailScreen,
+        navigationOptions: {
+            headerTitle: 'Meal Details',
+            headerStyle: {
+                backgroundColor: Colors.headerColor,
+            },
+            headerTintColor: 'white',
+        },
+
     },
 
 });
 
-
-export default  createAppContainer(MealsNavigator);
+// export all screens using createAppContainer(< Navigator >)
+export default createAppContainer(MealsNavigator);

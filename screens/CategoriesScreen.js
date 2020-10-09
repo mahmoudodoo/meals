@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Text , StyleSheet, FlatList} from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import CategoryMealsScreen from './CategoryMealsScreen';
-import {CATEGORIES} from '../data/dummy-data';
+import { CATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import CategoryGridTile from '../components/CategoryGridTile';
 
 
 const CategoriesScreen = props => {
@@ -11,55 +12,60 @@ const CategoriesScreen = props => {
 
 
     const renderGridItem = (itemData) => {
-        return(
-        <TouchableOpacity style = {styles.gridItem}
-        onPress = {() => {props.navigation.navigate({
-            routeName:'CategoryMeals',
-            params: {
-                categoryId:itemData.item.id,
-            },
+        return (
+            <CategoryGridTile
+                title={itemData.item.title}
+                color={itemData.item.color}
+                onSelect={() => {
+                    props.navigation.navigate({
+                        routeName: 'CategoryMeals',
+                        params: {
+                            categoryId: itemData.item.id,
+                        },
 
-        })}}
-        >
-        <View>
-        <Text>{itemData.item.title}</Text>
-        </View>
-        </TouchableOpacity>
+                    })
+                }}
+
+            />
         );
     };
 
-    
-    return(
 
-        <FlatList keyExtractor={(item,index) => item.id } data={CATEGORIES} renderItem={renderGridItem}  numColumns={2}/>
-    
-        );
+    return (
+        // Create a new flatList 
+        <FlatList
+            // Adding key for each item in the flatlist from CATEGORIES list
+            keyExtractor={(item, index) => item.id}
+            // Adding data to our FlatList from /data/dummy-data.js
+            data={CATEGORIES}
+            // render items using renderGridItem function above 
+            renderItem={renderGridItem}
+            // Number of columns in the FlatList
+            numColumns={2} />
+
+    );
 
 };
 
 
-    // CategoriesScreen.navigationOptions = {
-    //     headerTitle:  'Meal Categories',
-    //     headerStyle: {
-    //         backgroundColor:Colors.headerColor,
-    //     },
-    //     headerTintColor:'white',
-    // };
+// CategoriesScreen.navigationOptions = {
+//     headerTitle:  'Meal Categories',
+//     headerStyle: {
+//         backgroundColor:Colors.headerColor,
+//     },
+//     headerTintColor:'white',
+// };
 
 
 
-
+// styles
 const styles = StyleSheet.create({
-    screen:{
-        flex:1,
-        justifyContent:'center',
+    screen: {
+        flex: 1,
+        justifyContent: 'center',
         alignItems: 'center'
     },
-    gridItem: {
-        flex:1,
-        margin: 5,
-        height:150,
-    },
+
 });
 
 export default CategoriesScreen;

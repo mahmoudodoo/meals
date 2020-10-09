@@ -5,6 +5,8 @@ import * as Font from 'expo-font';
 import { AppLoading } from "expo";
 import MealsNavigator from './navigation/MealsNavigator'
 
+
+// fetching set of fonts from assets/fonts using Font.loadAsync
 const fetchFonts = () => {
   return Font.loadAsync({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -15,24 +17,27 @@ const fetchFonts = () => {
 
 export default function App() {
 
+  // Initialize fontLoad var with false value
+  const [fontLoaded, SetFontLoaded] = useState(false);
 
-  const [fontLoaded,SetFontLoaded] =  useState(false);
 
-
-  if(!fontLoaded){
-    return <AppLoading 
-            startAsync={fetchFonts}
-            onFinish={() => SetFontLoaded(true)}
+  // check if the font has loaded
+  if (!fontLoaded) {
+    return <AppLoading
+      startAsync={fetchFonts}
+      onFinish={() => SetFontLoaded(true)}
     />;
   };
 
 
   return (
-   // <View></View>
+
+    // Adding Screens (Navigation)  
     <MealsNavigator />
   );
 }
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
