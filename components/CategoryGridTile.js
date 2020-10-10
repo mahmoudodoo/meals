@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, View,Text,StyleSheet } from 'react-native';
+import {TouchableOpacity, View,Text,StyleSheet, Platform } from 'react-native';
 
 
 // Create Category Grid Tile component 
@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
         flex:1,
         margin: 5,
         height:150,
+        elevation:5,
+        overflow: Platform.OS === 'android' && Platform.Version >= 21?  'hidden' : 'visible'
+
     },
     container:{
         flex:1,
@@ -35,7 +38,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.26,
         shadowOffset: {width : 0 , height: 2},
         shadowRadius: 9 ,
-        elevation:3,
+       
     },
     title:{
         fontFamily:'open-sans-bold',

@@ -1,49 +1,90 @@
-import { createStackNavigator } from 'react-navigation-stack';
+import React from 'react';
+import { Platform } from 'react-native';
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+} from 'react-navigation-stack';
+import { Ionicons } from '@expo/vector-icons';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailScreen from '../screens/MealDetailScreen';
-import { createAppContainer } from 'react-navigation';
+import FavoritesScreen from '../screens/FavoritesScreen';
 import Colors from '../constants/Colors';
+import { createAppContainer } from 'react-navigation';
 
-// Create a new navigation screens using  (react-navigation-stack) library
+const defaultStackNavOptions = {
+  headerStyle: {
+    backgroundColor: Platform.OS === 'android' ? Colors.headerColor : ''
+  },
+  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.headerColor,
+  headerTitle: 'Categories'
+};
 
-const MealsNavigator = createStackNavigator({
-    // First screen
+const MealsNavigator = createStackNavigator(
+  {
     Categories: {
-        screen: CategoriesScreen,
-        navigationOptions: {
-            headerTitle: 'Meal Categories',
-            headerStyle: {
-                backgroundColor: Colors.headerColor,
-            },
-            headerTintColor: 'white',
-        },
+      screen: CategoriesScreen
     },
-
-    // Second screen
     CategoryMeals: {
-        screen: CategoryMealsScreen,
-        navigationOptions: {
-            headerStyle: {
-                backgroundColor: Colors.headerColor,
-            },
-            headerTintColor: 'white',
-        },
+      screen: CategoryMealsScreen
     },
-    // Third screen 
-    MealDetail: {
-        screen: MealDetailScreen,
-        navigationOptions: {
-            headerStyle: {
-                backgroundColor: Colors.headerColor,
-            },
-            headerTintColor: 'white',
-        },
+    MealDetail: MealDetailScreen
+  },
+  {
+    // initialRouteName: 'Categories',
+    defaultNavigationOptions: defaultStackNavOptions
+  }
+);
 
-    },
+const FavNavigator = createStackNavigator(
+  {
+    Favorites: FavoritesScreen,
+    MealDetail: MealDetailScreen
+  },
+  {
+    // initialRouteName: 'Categories',
+    defaultNavigationOptions: defaultStackNavOptions
+  }
+);
 
-});
+const tabScreenConfig = {
+  Meals: {
+    screen: MealsNavigator,
+    navigationOptions: {
+      tabBarIcon: tabInfo => {
+        return (
+          <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} />
+        );
+      },
+      tabBarColor: Colors.primaryColor
+    }
+  },
+  Favorites: {
+    screen: FavNavigator,
+    navigationOptions: {
+      tabBarIcon: tabInfo => {
+        return <Ionicons name="ios-star" size={25} color={tabInfo.tintColor} />;
+      },
+      tabBarColor: Colors.accentColor
+    }
+  }
+};
 
-// export all screens using createAppContainer(< Navigator >)
-export default createAppContainer(MealsNavigator);
+const MealsFavTabNavigator =
+  Platform.OS === 'android'
+    ? createMaterialBottomTabNavigator(tabScreenConfig, {
+        activeTintColor: 'white',
+        shifting: true,
+        barStyle: {
+          backgroundColor: Colors.primaryColor
+        }
+      })
+    : createBottomTabNavigator(tabScreenConfig, {
+        tabBarOptions: {
+          activeTintColor: Colors.accentColor
+        }
+      });
+
+export default createAppContainer(MealsFavTabNavigator);
