@@ -25,7 +25,6 @@ const MealsNavigator = createStackNavigator({
     CategoryMeals: {
         screen: CategoryMealsScreen,
         navigationOptions: {
-            headerTitle: 'Category Meals',
             headerStyle: {
                 backgroundColor: Colors.headerColor,
             },
@@ -36,7 +35,6 @@ const MealsNavigator = createStackNavigator({
     MealDetail: {
         screen: MealDetailScreen,
         navigationOptions: {
-            headerTitle: 'Meal Details',
             headerStyle: {
                 backgroundColor: Colors.headerColor,
             },

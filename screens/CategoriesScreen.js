@@ -21,6 +21,7 @@ const CategoriesScreen = props => {
                         routeName: 'CategoryMeals',
                         params: {
                             categoryId: itemData.item.id,
+                            titleScreen: itemData.item.title,
                         },
 
                     })

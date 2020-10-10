@@ -14,11 +14,21 @@ const CategoryMealsScreen = props => {
         return (
             <MealItem 
             title={itemData.item.title} 
-            onSelectMeal={() => { }} 
             duration = {itemData.item.duration} 
             complexity = {itemData.item.complexity}
             affordability = {itemData.item.affordability}
             image = {itemData.item.imageUrl}
+            onSelectMeal={() => { 
+                props.navigation.navigate({
+                    routeName: 'MealDetail',
+                    params:{
+                        mealId:itemData.item.id,
+
+                    }
+                });
+            }} 
+
+
             />
         );
     };
@@ -47,6 +57,15 @@ const CategoryMealsScreen = props => {
 
     );
 
+};
+
+
+CategoryMealsScreen.navigationOptions = (navigationData) => {
+    const titleScreen = navigationData.navigation.getParam('titleScreen');
+
+    return {
+        headerTitle: titleScreen,
+    };
 };
 
 const styles = StyleSheet.create({
