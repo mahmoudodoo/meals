@@ -8,13 +8,14 @@ const MealItem = props => {
         <View style={styles.mealItem}>
             <TouchableOpacity onPress={props.onSelectMeal}>
                 <View>
-
+                    {/* Display Image Background and fetch the uri from other components */}
                     <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
                         <ImageBackground source={{ uri: props.image }} style={styles.bgImage}>
                             <Text style={styles.title} numberOfLines={1} >{props.title}</Text>
                         </ImageBackground>
                     </View>
 
+                    {/* Display  data that comes from other components */}
                     <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
                         <Text>{props.duration}m</Text>
                         <Text>{props.complexity.toUpperCase()}</Text>

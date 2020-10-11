@@ -4,6 +4,8 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import MealItem from './MealItem';
 
 const MealList = props => {
+
+  // Render MealItem to FlatList and Display list of data
   const renderMealItem = itemData => {
     return (
       <MealItem
@@ -23,7 +25,7 @@ const MealList = props => {
       />
     );
   };
-
+  // Display Data
   return (
     <View style={styles.list}>
       <FlatList

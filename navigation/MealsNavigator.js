@@ -14,6 +14,7 @@ import FavoritesScreen from '../screens/FavoritesScreen';
 import Colors from '../constants/Colors';
 import { createAppContainer } from 'react-navigation';
 
+// Set a default stack navigation options as an object
 const defaultStackNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === 'android' ? Colors.headerColor : ''
@@ -22,14 +23,18 @@ const defaultStackNavOptions = {
   headerTitle: 'Categories'
 };
 
+// Create the first stack navigator MealsNavigator
 const MealsNavigator = createStackNavigator(
   {
+    // First screen Categories
     Categories: {
       screen: CategoriesScreen
     },
+    // Second screen CategoryMeals
     CategoryMeals: {
       screen: CategoryMealsScreen
     },
+    // Third Screen MealDetail
     MealDetail: MealDetailScreen
   },
   {
@@ -38,6 +43,7 @@ const MealsNavigator = createStackNavigator(
   }
 );
 
+// Create the second navigator FavNavigator which is includes Favorites screen and MealDetail screen
 const FavNavigator = createStackNavigator(
   {
     Favorites: FavoritesScreen,
@@ -49,6 +55,7 @@ const FavNavigator = createStackNavigator(
   }
 );
 
+// Create tabScreen which is includes MealsNavigator,FavNavigator
 const tabScreenConfig = {
   Meals: {
     screen: MealsNavigator,
@@ -72,13 +79,14 @@ const tabScreenConfig = {
   }
 };
 
+// Set a different design for both Android and IOS Platforms 
 const MealsFavTabNavigator =
   Platform.OS === 'android'
     ? createMaterialBottomTabNavigator(tabScreenConfig, {
         activeTintColor: 'white',
         shifting: true,
         barStyle: {
-          backgroundColor: Colors.primaryColor
+          backgroundColor: Colors.accentColor
         }
       })
     : createBottomTabNavigator(tabScreenConfig, {
@@ -87,4 +95,5 @@ const MealsFavTabNavigator =
         }
       });
 
+// Export the Tab which contains all screens that we need  
 export default createAppContainer(MealsFavTabNavigator);
